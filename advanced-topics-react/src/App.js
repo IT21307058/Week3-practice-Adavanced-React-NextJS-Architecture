@@ -3,17 +3,23 @@ import { Routes as Switch, Route, Routes } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import ProductFilter from "./pages/ProductFilterUseMemo";
 import ProductListCallback from "./pages/ProductListUseCallback";
+import SearchWithDeferred from "./pages/ProductListUseDeferredValue";
+import ProductSearch from "./pages/ProductListUseTransistion";
+import { Counter } from "./pages/CounterState&RTK";
 
 function App() {
 
   return (
     <Router>
       <div style={{ minHeight: "90vh", margin: "0px", padding: "0px" }}>
-            <Switch>
-              <Route path="/" element={<Countries />} />
-              <Route path="/product" element={<ProductFilter />} />
-              <Route path="/product-callback" element={<ProductListCallback />} />
-            </Switch>
+        <Switch>
+          <Route path="/" element={<Countries />} />
+          <Route path="/product" element={<ProductFilter />} />
+          <Route path="/product-callback" element={<ProductListCallback />} />
+          <Route path="/product-deferred" element={<SearchWithDeferred />} />
+          <Route path="/product-transition" element={<ProductSearch />} />
+          <Route path="/product-state-rtk" element={<Counter />} />
+        </Switch>
       </div>
     </Router>
   )
