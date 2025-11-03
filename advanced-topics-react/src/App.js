@@ -6,6 +6,7 @@ import ProductListCallback from "./pages/ProductListUseCallback";
 import SearchWithDeferred from "./pages/ProductListUseDeferredValue";
 import ProductSearch from "./pages/ProductListUseTransistion";
 import { Counter } from "./pages/CounterState&RTK";
+import Parent from "./pages/ProductListUseCallback";
 
 function App() {
 
@@ -15,7 +16,7 @@ function App() {
         <Switch>
           <Route path="/" element={<Countries />} />
           <Route path="/product" element={<ProductFilter />} />
-          <Route path="/product-callback" element={<ProductListCallback />} />
+          <Route path="/product-callback" element={<Parent />} />
           <Route path="/product-deferred" element={<SearchWithDeferred />} />
           <Route path="/product-transition" element={<ProductSearch />} />
           <Route path="/product-state-rtk" element={<Counter />} />

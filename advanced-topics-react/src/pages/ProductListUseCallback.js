@@ -1,47 +1,71 @@
 import React, { useState, useCallback, memo } from "react";
 
-// ✅ Memoized child component
-const ProductItem = memo(function ProductItem({ product, onSelect }) {
-    console.log("Render:", product.name);
-    return (
-        <li onClick={() => onSelect(product)} style={{ cursor: "pointer" }}>
-            {product.name}
-        </li>
-    );
+// // ✅ Memoized child component
+// const ProductItem = memo(function ProductItem({ product, onSelect }) {
+//     console.log("Render:", product.name);
+//     return (
+//         <li onClick={() => onSelect(product)} style={{ cursor: "pointer" }}>
+//             {product.name}
+//         </li>
+//     );
+// });
+
+// const products = [
+//     { id: 1, name: "Laptop" },
+//     { id: 2, name: "Mouse" },
+//     { id: 3, name: "Keyboard" },
+//     { id: 4, name: "Monitor" },
+//     { id: 5, name: "KKKK" },
+// ];
+
+// export default function ProductListCallback() {
+//     const [search, setSearch] = useState("");
+
+//     // ✅ useCallback returns the same function instance unless dependencies change
+//     const handleSelect = useCallback((product) => {
+//         alert(`You selected ${product.name}`);
+//     }, []); // no dependencies → stable reference forever
+
+//     const filtered = products.filter((p) =>
+//         p.name.toLowerCase().includes(search.toLowerCase())
+//     );
+
+//     return (
+//         <div>
+//             <input
+//                 placeholder="Search products..."
+//                 value={search}
+//                 onChange={(e) => setSearch(e.target.value)}
+//             />
+//             <ul>
+//                 {filtered.map((p) => (
+//                     <ProductItem key={p.id} product={p} onSelect={handleSelect} />
+//                 ))}
+//             </ul>
+//         </div>
+//     );
+// }
+
+
+//Child is memoized (React.memo)
+//useCallback makes handleClick keep the same reference, but React will still re-run Child every time Parent renders unless Child is wrapped in React.memo.
+const Child = memo(function Child({ onClick }) {
+  console.log("👶 Child rendered");
+  return <button onClick={onClick}>Click me</button>;
 });
 
-const products = [
-    { id: 1, name: "Laptop" },
-    { id: 2, name: "Mouse" },
-    { id: 3, name: "Keyboard" },
-    { id: 4, name: "Monitor" },
-    { id: 5, name: "KKKK" },
-];
+export default function Parent() {
+    const [count, setCount] = useState(0);
 
-export default function ProductListCallback() {
-    const [search, setSearch] = useState("");
+    const handleClick = useCallback(() => console.log("Button clicked!"), []);
 
-    // ✅ useCallback returns the same function instance unless dependencies change
-    const handleSelect = useCallback((product) => {
-        alert(`You selected ${product.name}`);
-    }, []); // no dependencies → stable reference forever
-
-    const filtered = products.filter((p) =>
-        p.name.toLowerCase().includes(search.toLowerCase())
-    );
+    console.log("👨 Parent rendered");
 
     return (
         <div>
-            <input
-                placeholder="Search products..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-            />
-            <ul>
-                {filtered.map((p) => (
-                    <ProductItem key={p.id} product={p} onSelect={handleSelect} />
-                ))}
-            </ul>
+            <h2>Count: {count}</h2>
+            <button onClick={() => setCount(count + 1)}>Increase count</button>
+            <Child onClick={handleClick} />
         </div>
     );
 }
