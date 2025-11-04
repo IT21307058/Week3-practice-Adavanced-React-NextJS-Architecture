@@ -8,3 +8,5 @@
 
 ## Development
 ### Next.js (App Router) SSR page and push Lighthouse ≥90 across Performance/SEO/Best-Practices/Accessibility.
+
+<img width="1482" height="685" alt="image" src="https://github.com/user-attachments/assets/eaaa8d5b-8a46-4806-bf58-dfca5b89835a" />
